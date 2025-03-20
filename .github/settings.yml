@@ -1,0 +1,38 @@
+---
+
+repository:
+  name: streaming_data
+  description: Process Netflix Data
+  homepage: null
+  topics: ''
+  private: false
+  has_issues: false
+  has_projects: true
+  has_wiki: false
+  has_downloads: true
+  default_branch: main
+  allow_squash_merge: true
+  allow_merge_commit: true
+  allow_rebase_merge: true
+  enable_automated_security_fixes: true
+  enable_vulnerability_alerts: true
+branches:
+  - name: main
+    protection:
+      required_status_checks:
+        strict: false
+        contexts:
+          - check-yaml
+          - pre-commit
+          - ruff
+          - Shellcheck
+          - test-bom-check
+      required_linear_history: false
+      enforce_admins: false
+      restrictions: null
+  - name: '*-base'
+    protection:
+      required_status_checks: null
+      enforce_admins: false
+      required_linear_history: false
+      restrictions: null
