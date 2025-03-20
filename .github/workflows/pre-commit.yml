@@ -1,0 +1,52 @@
+---
+
+name: '[Reusable] pre-commit'
+
+on:
+  - pull_request
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  pre-commit:
+    # If this name field is changed, so must the context within the .github/settings.yml
+    name: pre-commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # python setup
+      - name: 'Setup python'
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+
+      - name: 'Install python dependencies'
+        run: pip install '.[dev]'
+      # end python setup
+
+      - name: 'Get terraform version'
+        id: terraform_version
+        working-directory: infra/terraform
+        run: |
+          terraform_version="$(< .terraform-version)"
+          echo "version=$terraform_version" >> "$GITHUB_OUTPUT"
+
+      - name: 'Setup terraform'
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ steps.terraform_version.outputs.version }}
+
+      - name: 'Set up Homebrew'
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: 'Install dev dependencies'
+        run: brew bundle install
+
+      - name: 'Run pre-commit'
+        uses: pre-commit/action@v3.0.1
