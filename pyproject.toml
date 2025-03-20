@@ -18,12 +18,13 @@ homepage = "https://github.com/lyonsa/streaming_data.git"
 
 [tool.setuptools]
 package-dir = { "" = "src" }
+
 packages = [
-    "streaming",
+    "project_name",
 ]
 
 [project.scripts]
-streaming_data = "streaming_data:main"
+project_name = "hello_world:main"
 
 [tool.ruff]
 line-length = 100
