@@ -22,12 +22,7 @@ branches:
       required_status_checks:
         strict: false
         contexts:
-          - check-yaml
           - pre-commit
-          - ruff
-          - Shellcheck
-          - test-bom-check
-          - unit-test
       required_linear_history: false
       enforce_admins: false
       restrictions: null

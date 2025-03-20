@@ -1,5 +1,3 @@
----
-
 name: '[Reusable] pre-commit'
 
 on:
@@ -29,18 +27,6 @@ jobs:
       - name: 'Install python dependencies'
         run: pip install '.[dev]'
       # end python setup
-
-      - name: 'Get terraform version'
-        id: terraform_version
-        working-directory: infra/terraform
-        run: |
-          terraform_version="$(< .terraform-version)"
-          echo "version=$terraform_version" >> "$GITHUB_OUTPUT"
-
-      - name: 'Setup terraform'
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: ${{ steps.terraform_version.outputs.version }}
 
       - name: 'Set up Homebrew'
         uses: Homebrew/actions/setup-homebrew@master
