@@ -26,7 +26,7 @@ branches:
           - pre-commit
           - ruff
           - Shellcheck
-          - unit-test
+          - test-bom-check
       required_linear_history: false
       enforce_admins: false
       restrictions: null
