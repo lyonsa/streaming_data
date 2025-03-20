@@ -1,0 +1,36 @@
+---
+
+name: Run unit tests
+
+on:
+  - pull_request
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  unit-test:
+    # If this name field is changed, so must the context within the .github/settings.yml
+    name: unit-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      # python setup
+      - name: 'Setup python'
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+
+      - name: 'Update basic module tools'
+        run: pip install --upgrade setuptools wheel pip
+
+      - name: 'Install python dependencies'
+        run: pip install '.[dev]'
+      # end python setup
+
+      - name: 'Run unit tests'
+        run: python -m pytest --cov=tools --cov=maintenance --cov-report term
