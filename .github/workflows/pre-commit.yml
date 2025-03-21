@@ -1,3 +1,5 @@
+---
+
 name: '[Reusable] pre-commit'
 
 on:

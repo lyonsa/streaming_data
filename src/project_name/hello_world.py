@@ -1,9 +1,9 @@
-def hello_world() -> None:
-    print("Hello World!")
+def hello_world(text: str) -> None:
+    print(f'{text}')
 
 
 def main() -> None:
-    hello_world()
+    hello_world("string")
 
 
 if __name__ == "__main__":
