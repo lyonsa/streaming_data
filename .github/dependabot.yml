@@ -3,15 +3,17 @@
 version: 2
 updates:
   - package-ecosystem: "github-actions"
-    directories:
-      - "/"
+    directory: "/"
     schedule:
-      # Check for updates to GitHub Actions every week
-      interval: "weekly"
-    labels:
-      - "dependencies"
-    groups:
-      github-actions:
-        applies-to: version-updates
-        patterns:
-          - "*"
+      interval: weekly
+    commit-message:
+      prefix: "fix: "
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+    allow:
+      - dependency-type: direct
+      - dependency-type: indirect
+    commit-message:
+      prefix: "fix: "

@@ -1,8 +1,8 @@
 ---
 
 repository:
-  name: streaming_data
-  description: Process Netflix Data
+  name: python_template
+  description: Template for Python projects
   homepage: null
   topics: ''
   private: false
